@@ -1,16 +1,11 @@
-import React from 'react'
+import Card from '../UI/Card'
 
 export default function UserCard(props) {
     return (
-        <div>
-            <div className="card text-center">
-                <div className="card-header">
-                    {props.userName}
-                </div>
-                <div className="card-footer text-muted">
-                    {props.userAge}
-                </div>
-            </div>
-        </div>
+        <Card>
+            <ul>
+                {props.users.length>0 ? props.users.map((user) => <li key={user.id}> {user.name} is {user.age} years old.</li>) :'No records to show'}
+            </ul>
+        </Card>
     )
 }
