@@ -2,6 +2,7 @@ import React , {useState} from 'react';
 import UserCard from './components/Users/UserCard'
 import './App.css';
 import AddUser from './components/Users/AddUserForm';
+import Wrapper from './components/wrapper/Wrapper';
 
 
 function App() {
@@ -10,13 +11,15 @@ function App() {
   setUsersList((prevUsersList)=>{return [...prevUsersList ,{id:Math.random() ,name:userName ,age:userAge}]})
  }
   return (
-    <div className="App">
+    <Wrapper>
+     {/* <div className="App"> */}
       <AddUser  onAddUser={addUserHandler}/>
       <div>
         <UserCard  users={usersList}/>
       </div>
       
-    </div>
+     {/* </div> */}
+    </Wrapper>
   );
 }
 

@@ -1,47 +1,57 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ErrorModal from "../UI/ErrorModal";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 
 export default function AddUserForm(props) {
-    const [inputUserName, setInputUserName] = useState("");
-    const [inputAge, setInputAge] = useState("");
+    //USING OF REF INSTEAD OF STATES 
+    // const [inputUserName, setInputUserName] = useState("");
+    // const [inputAge, setInputAge] = useState("");
     const [error, setError] = useState();
+    const ageInputRef=useRef()    //REF
+    const nameInputRef=useRef()   //REF
     const addUserHandler = (event) => {
         event.preventDefault();
-        if (inputUserName.trim().length === 0 || inputAge.trim().length === 0) {
+      console.log(ageInputRef.current.value , nameInputRef.current.value)
+        if (ageInputRef.current.value.trim().length === 0 || nameInputRef.current.value.trim().length === 0) {
             setError({
                 title: 'Invalid Input',
                 message: 'Please enter your name and age  '
             })
             return;
         }
-        if (+inputAge <= 1) {
+        if (+ageInputRef.current.value <= 1) {
             setError({
                 title: 'Invalid Age',
                 message: 'Age can neither be Negative nor 0'
             })
             return
         }
-        console.log(inputAge, inputUserName);
-        props.onAddUser(inputUserName, inputAge);
-        setInputAge("");
-        setInputUserName("");
+        console.log(ageInputRef.current.value, nameInputRef.current.value);
+        props.onAddUser(nameInputRef.current.value, ageInputRef.current.value);
+        ageInputRef.current.value=''
+        nameInputRef.current.value=''
+
+        //USING OF REF INSTEAD OF STATES 
+        // setInputAge("");
+        // setInputUserName("");
     };
 
-    const inputUserNameHandler = (event) => {
-        setInputUserName(event.target.value);
-        // console.log(inputUserName);
-    };
 
-    const inputAgeHandler = (event) => {
-        setInputAge(event.target.value);
-        // console.log(inputAge);
-    };
+    //USING OF REF INSTEAD OF STATES 
+    // const inputUserNameHandler = (event) => {
+    //     setInputUserName(event.target.value);
+    //     // console.log(inputUserName);
+    // };
+
+    // const inputAgeHandler = (event) => {
+    //     setInputAge(event.target.value);
+    //     // console.log(inputAge);
+    // };
     const errorHandler = () => {
         setError();
-        setInputAge("");
-        setInputUserName("");
+        // setInputAge("");
+        // setInputUserName("");
     }
 
     return (
@@ -55,10 +65,11 @@ export default function AddUserForm(props) {
                         </label>
                         <input
                             type="username"
-                            value={inputUserName}
-                            onChange={inputUserNameHandler}
+                            // value={inputUserName}
+                            // onChange={inputUserNameHandler}
                             className="form-control"
                             id="username"
+                            ref={nameInputRef}
                             aria-describedby="emailHelp"
                         />
                     </div>
@@ -68,11 +79,12 @@ export default function AddUserForm(props) {
                         </label>
                         <input
                             type="number"
-                            value={inputAge}
+                            // value={inputAge}
                             step={1}
-                            onChange={inputAgeHandler}
+                            // onChange={inputAgeHandler}
                             className="form-control"
                             id="age"
+                            ref={ageInputRef}
                         />
                     </div>
                     <Button type="submit" buttonTitle="Add User"></Button>

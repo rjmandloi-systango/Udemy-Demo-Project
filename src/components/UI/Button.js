@@ -1,8 +1,10 @@
 import React from "react";
+import Wrapper from "../wrapper/Wrapper";
 
 export default function Button(props) {
   return (
-    <div>
+    <Wrapper>
+    {/* // <div> */}
       <button
         type={props.type || "button"}
         className="btn btn-primary  mx-auto mb-2"
@@ -10,6 +12,7 @@ export default function Button(props) {
       >
         {props.buttonTitle}
       </button>
-    </div>
+    {/* // </div> */}
+    </Wrapper>
   );
 }
